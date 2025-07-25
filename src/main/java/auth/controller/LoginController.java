@@ -46,6 +46,10 @@ public class LoginController {
                 String hashed = rs.getString("contrasena");
                 String rol = rs.getString("rol");
 
+                System.out.println("Contraseña ingresada: " + contrasena);
+                System.out.println("Hash desde la BD: " + hashed);
+                System.out.println("Comparación BCrypt: " + BCrypt.checkpw(contrasena, hashed));
+
                 if (BCrypt.checkpw(contrasena, hashed)) {
                     lblMensaje.setText("Inicio de sesión exitoso.");
 
