@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http:javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="auth.controller.DashboardUser"
-            prefHeight="400.0" prefWidth="600.0">
+            fx:controller="auth.controller.DashboardAdminController"
+            prefWidth="600" prefHeight="400">
 
-</AnchorPane>
+    <top>
+        <ToolBar>
+            <Label text="Panel de Administración de Usuarios" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <Pane fx:id="espaciador" HBox.hgrow="ALWAYS" />
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" />
+        </ToolBar>
+    </top>
+
+    <center>
+        <TableView fx:id="tablaUsuarios" prefHeight="350">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+                <TableColumn fx:id="colNombre" text="Nombre" prefWidth="150" />
+                <TableColumn fx:id="colCorreo" text="Correo" prefWidth="200" />
+                <TableColumn fx:id="colRol" text="Rol" prefWidth="100" />
+            </columns>
+        </TableView>
+    </center>
+
+</BorderPane>
