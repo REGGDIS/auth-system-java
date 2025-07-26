@@ -72,4 +72,18 @@ public class LoginController {
             lblMensaje.setText("Error al conectar a la base de datos.");
         }
     }
+
+    @FXML
+    public void irARegistro(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registro.fxml"));
+            Stage stage = (Stage) txtCorreo.getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Registro de Usuario");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            lblMensaje.setText("Error al cargar la vista de registro.");
+        }
+    }
 }

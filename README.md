@@ -3,10 +3,12 @@
 Este proyecto es una aplicación de escritorio desarrollada en **Java** utilizando **JavaFX** y una arquitectura **MVC**, que permite autenticación de usuarios con distintos roles (`admin` y `user`).
 
 ## 🔐 Funcionalidades
-- Inicio de sesión con validación de credenciales en base de datos.
+- Login funcional con validación y encriptación.
 - Contraseñas cifradas con BCrypt.
+- Registro de nuevos usuarios con hash de contraseña.
+- Conexión a base de datos MySQL.
 - Redirección según el rol del usuario (`admin` o `user`).
-- Interfaz visual construida con SceneBuilder.
+- Interfaz visual construida con JavaFX + SceneBuilder.
 
 ## 🧰 Tecnologías utilizadas
 - Java 23

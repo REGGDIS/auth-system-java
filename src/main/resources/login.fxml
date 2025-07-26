@@ -16,6 +16,7 @@
         <PasswordField fx:id="txtContrasena" promptText="Contraseña" />
 
         <Button text="Iniciar sesión" onAction="#handleLogin" maxWidth="150" />
+        <Button text="¿No tienes cuenta? Regístrate" onAction="#irARegistro" maxWidth="200" />
 
         <Label fx:id="lblMensaje" textFill="red" />
     </VBox>
