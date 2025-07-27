@@ -31,7 +31,18 @@ public class DashboardAdminController {
     @FXML
     private TableColumn<Usuario, String> colRol;
 
+    @FXML
+    private TextField txtNombre;
+
+    @FXML
+    private TextField txtCorreo;
+
+    @FXML
+    private TextField txtRol;
+
     private ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList();
+
+    private Usuario usuarioSeleccionado;
 
     @FXML
     public void initialize() {
@@ -40,7 +51,18 @@ public class DashboardAdminController {
         colCorreo.setCellValueFactory(cellData -> cellData.getValue().correoProperty());
         colRol.setCellValueFactory(cellData -> cellData.getValue().rolProperty());
 
+        tablaUsuarios.setItems(listaUsuarios);
         cargarUsuarios();
+
+        // Al hacer clic en una fila, cargar datos en los campos
+        tablaUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+            if (newSel != null) {
+                usuarioSeleccionado = newSel;
+                txtNombre.setText(newSel.getNombre());
+                txtCorreo.setText(newSel.getCorreo());
+                txtRol.setText(newSel.getRol());
+            }
+        });
     }
 
     private void cargarUsuarios() {
@@ -60,10 +82,54 @@ public class DashboardAdminController {
                 listaUsuarios.add(u);
             }
 
-            tablaUsuarios.setItems(listaUsuarios);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void guardarCambios() {
+        if (usuarioSeleccionado == null) {
+            mostrarAlerta("Por favor selecciona un usuario primero.");
+            return;
+        }
+
+        String nuevoNombre = txtNombre.getText().trim();
+        String nuevoCorreo = txtCorreo.getText().trim();
+        String nuevoRol = txtRol.getText().trim();
+
+        if (nuevoNombre.isEmpty() || nuevoCorreo.isEmpty() || nuevoRol.isEmpty()) {
+            mostrarAlerta("Todos los campos deben estar completos.");
+            return;
+        }
+
+        try (Connection conn = ConexionBD.conectar()) {
+            String sql = "UPDATE usuarios SET nombre = ?, correo = ?, rol = ? WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, nuevoNombre);
+            stmt.setString(2, nuevoCorreo);
+            stmt.setString(3, nuevoRol);
+            stmt.setInt(4, usuarioSeleccionado.getId());
+
+            int filas = stmt.executeUpdate();
+            if (filas > 0) {
+                // Actualizar el objeto local
+                usuarioSeleccionado.setNombre(nuevoNombre);
+                usuarioSeleccionado.setCorreo(nuevoCorreo);
+                usuarioSeleccionado.setRol(nuevoRol);
+                tablaUsuarios.refresh();
+                mostrarInfo("Usuario actualizado correctamente.");
+
+                usuarioSeleccionado = null;
+                txtNombre.clear();
+                txtCorreo.clear();
+                txtRol.clear();
+                tablaUsuarios.getSelectionModel().clearSelection();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
+            mostrarAlerta("Error al actualizar el usuario.");
         }
     }
 
@@ -78,5 +144,21 @@ public class DashboardAdminController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void mostrarInfo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

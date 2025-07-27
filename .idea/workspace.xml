@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b54037a0-57a6-429b-b927-af6cc3e507e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/auth/controller/DashboardAdminController.java" afterDir="false" />
+    <list default="true" id="b54037a0-57a6-429b-b927-af6cc3e507e4" name="Changes" comment="Implementación del panel admin con tabla de usuarios funcional">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/auth/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/auth/model/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/auth/controller/DashboardAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/auth/controller/DashboardAdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/dashboard_admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dashboard_admin.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "REGGDIS"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/REGGDIS/auth-system-java.git",
+    "accountId": "8a47bc93-dd5e-410a-95b8-6f8e51e9acad"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -105,6 +116,15 @@
       <option name="presentableId" value="Default" />
       <updated>1753300397347</updated>
     </task>
+    <task id="LOCAL-00001" summary="Implementación del panel admin con tabla de usuarios funcional">
+      <option name="closed" value="true" />
+      <created>1753571176955</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753571176955</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -117,5 +137,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Implementación del panel admin con tabla de usuarios funcional" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementación del panel admin con tabla de usuarios funcional" />
   </component>
 </project>
