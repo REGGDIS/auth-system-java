@@ -161,4 +161,40 @@ public class DashboardAdminController {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
+    @FXML
+    public void eliminarUsuario() {
+        if (usuarioSeleccionado == null) {
+            mostrarAlerta("Por favor selecciona un usuario para eliminar.");
+            return;
+        }
+
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmar eliminación");
+        confirmacion.setHeaderText(null);
+        confirmacion.setContentText("¿Estás seguro de que deseas eliminar al usuario seleccionado?");
+
+        confirmacion.showAndWait().ifPresent(respuesta -> {
+            if (respuesta == ButtonType.OK) {
+                try (Connection conn = ConexionBD.conectar()) {
+                    String sql = "DELETE FROM usuarios WHERE id = ?";
+                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setInt(1, usuarioSeleccionado.getId());
+
+                    int filas = stmt.executeUpdate();
+                    if (filas > 0) {
+                        listaUsuarios.remove(usuarioSeleccionado);
+                        mostrarInfo("Usuario eliminado correctamente.");
+                        usuarioSeleccionado = null;
+                        txtNombre.clear();
+                        txtCorreo.clear();
+                        txtRol.clear();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mostrarAlerta("Error al eliminar el usuario.");
+                }
+            }
+        });
+    }
 }

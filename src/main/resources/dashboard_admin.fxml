@@ -46,6 +46,7 @@
             </GridPane>
 
             <Button text="Guardar Cambios" onAction="#guardarCambios" />
+            <Button text="Eliminar Usuario" onAction="#eliminarUsuario" />
         </VBox>
     </bottom>
 

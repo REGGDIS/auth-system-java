@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b54037a0-57a6-429b-b927-af6cc3e507e4" name="Changes" comment="Implementación del panel admin con tabla de usuarios funcional">
+    <list default="true" id="b54037a0-57a6-429b-b927-af6cc3e507e4" name="Changes" comment="Implementada funcionalidad de edición de usuarios desde panel de administrador">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/auth/controller/DashboardAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/auth/controller/DashboardAdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/dashboard_admin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dashboard_admin.fxml" afterDir="false" />
@@ -25,18 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "REGGDIS"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;REGGDIS&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/REGGDIS/auth-system-java.git",
-    "accountId": "8a47bc93-dd5e-410a-95b8-6f8e51e9acad"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/REGGDIS/auth-system-java.git&quot;,
+    &quot;accountId&quot;: &quot;8a47bc93-dd5e-410a-95b8-6f8e51e9acad&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -46,23 +46,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.GenerarHash.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Maven.Run JavaFX.executor": "Run",
-    "Maven.auth-system-java [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "C:/Trabajos/ProyectosJava/auth-system-java/src/main/java/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GenerarHash.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Run JavaFX.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.auth-system-java [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Trabajos/ProyectosJava/auth-system-java/src/main/java/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="auth.model" />
@@ -124,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753571176955</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implementada funcionalidad de edición de usuarios desde panel de administrador">
+      <option name="closed" value="true" />
+      <created>1753644994109</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753644994109</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -140,6 +148,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implementación del panel admin con tabla de usuarios funcional" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementación del panel admin con tabla de usuarios funcional" />
+    <MESSAGE value="Implementada funcionalidad de edición de usuarios desde panel de administrador" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementada funcionalidad de edición de usuarios desde panel de administrador" />
   </component>
 </project>
