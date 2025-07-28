@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,6 +41,9 @@ public class DashboardAdminController {
     @FXML
     private TextField txtRol;
 
+    @FXML
+    private Label lblTituloFormulario;
+
     private ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList();
 
     private Usuario usuarioSeleccionado;
@@ -61,6 +65,7 @@ public class DashboardAdminController {
                 txtNombre.setText(newSel.getNombre());
                 txtCorreo.setText(newSel.getCorreo());
                 txtRol.setText(newSel.getRol());
+                lblTituloFormulario.setText("Editar Usuario");
             }
         });
     }
@@ -89,11 +94,6 @@ public class DashboardAdminController {
 
     @FXML
     public void guardarCambios() {
-        if (usuarioSeleccionado == null) {
-            mostrarAlerta("Por favor selecciona un usuario primero.");
-            return;
-        }
-
         String nuevoNombre = txtNombre.getText().trim();
         String nuevoCorreo = txtCorreo.getText().trim();
         String nuevoRol = txtRol.getText().trim();
@@ -104,33 +104,65 @@ public class DashboardAdminController {
         }
 
         try (Connection conn = ConexionBD.conectar()) {
-            String sql = "UPDATE usuarios SET nombre = ?, correo = ?, rol = ? WHERE id = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nuevoNombre);
-            stmt.setString(2, nuevoCorreo);
-            stmt.setString(3, nuevoRol);
-            stmt.setInt(4, usuarioSeleccionado.getId());
+            if (usuarioSeleccionado == null) {
+                // Insertar nuevo Usuario
+                String contrasenaTemporal = "temporal123";
+                String hash = BCrypt.hashpw(contrasenaTemporal, BCrypt.gensalt());
 
-            int filas = stmt.executeUpdate();
-            if (filas > 0) {
-                // Actualizar el objeto local
-                usuarioSeleccionado.setNombre(nuevoNombre);
-                usuarioSeleccionado.setCorreo(nuevoCorreo);
-                usuarioSeleccionado.setRol(nuevoRol);
-                tablaUsuarios.refresh();
-                mostrarInfo("Usuario actualizado correctamente.");
+                String sql = "INSERT INTO usuarios (nombre, correo, rol, contrasena) VALUES (?, ?, ?, ?)";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, nuevoNombre);
+                stmt.setString(2, nuevoCorreo);
+                stmt.setString(3, nuevoRol);
+                stmt.setString(4, hash);
 
-                usuarioSeleccionado = null;
-                txtNombre.clear();
-                txtCorreo.clear();
-                txtRol.clear();
-                tablaUsuarios.getSelectionModel().clearSelection();
+                int filas = stmt.executeUpdate();
+                if (filas > 0) {
+                    mostrarInfo("Nuevo usuario creado correctamente. Contraseña temporal: temporal123");
+                    cargarUsuarios();
+                }
+
+            } else {
+                // Actualizar Usuario existente
+                String sql = "UPDATE usuarios SET nombre = ?, correo = ?, rol = ? WHERE id = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, nuevoNombre);
+                stmt.setString(2, nuevoCorreo);
+                stmt.setString(3, nuevoRol);
+                stmt.setInt(4, usuarioSeleccionado.getId());
+
+                int filas = stmt.executeUpdate();
+                if (filas > 0) {
+                    // Actualizar el objeto local
+                    usuarioSeleccionado.setNombre(nuevoNombre);
+                    usuarioSeleccionado.setCorreo(nuevoCorreo);
+                    usuarioSeleccionado.setRol(nuevoRol);
+                    tablaUsuarios.refresh();
+                    mostrarInfo("Usuario actualizado correctamente.");
+                }
             }
+
+            // Limpiar formulario y resetear selección
+            usuarioSeleccionado = null;
+            txtNombre.clear();
+            txtCorreo.clear();
+            txtRol.clear();
+            tablaUsuarios.getSelectionModel().clearSelection();
 
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta("Error al actualizar el usuario.");
         }
+    }
+
+    @FXML
+    public void nuevoUsuario() {
+        usuarioSeleccionado = null;
+        txtNombre.clear();
+        txtCorreo.clear();
+        txtRol.clear();
+        tablaUsuarios.getSelectionModel().clearSelection();
+        lblTituloFormulario.setText("Agregar Nuevo Usuario");
     }
 
     @FXML
