@@ -4,35 +4,32 @@ Este proyecto es una aplicación de escritorio desarrollada en **Java** utilizan
 
 ## 🔐 Funcionalidades
 
-- Login funcional con validación y encriptación de contraseñas.
-- Contraseñas cifradas con BCrypt.
-- Registro de nuevos usuarios con hash de contraseña.
-- Redirección a vistas según el rol del usuario (`admin` o `user`).
-- Interfaz visual construida con JavaFX + SceneBuilder.
-- Conexión a base de datos MySQL.
-- Panel de administración (solo para `admin`) con funcionalidades completas de CRUD:
-    - 📋 Listar usuarios.
-    - ✏️ Editar nombre, correo y rol.
-    - 🗑️ Eliminar usuarios.
-    - ➕ Crear nuevos usuarios con contraseña temporal cifrada.
+- **Modern UI**: Interfaz visual renovada con el tema **PrimerDark** de **AtlantaFX**.
+- **Arquitectura Service/DAO**: Lógica de negocio desacoplada de los controladores para mayor mantenibilidad.
+- **Navegación Centralizada**: Uso de `SceneManager` para gestionar transiciones entre vistas de forma eficiente.
+- **Conexión Robusta**: Implementación de pool de conexiones con **HikariCP**.
+- **Seguridad**: Contraseñas cifradas con BCrypt y soporte para credenciales mediante variables de entorno.
+- **CRUD Completo (Admin)**: Gestión integral de usuarios con validaciones modernas.
+- **Logging**: Sistema de trazas implementado con **SLF4J + Logback**.
 
 ## 🖼️ Capturas de pantalla
 
 ### Login
-
 ![Login](screenshots/login.png)
 
-### Panel de Administración
-
+### Panel de Administración (Modernizado)
 ![Dashboard Admin](screenshots/dashboard_admin.png)
 
 ## 🧰 Tecnologías utilizadas
-- Java 23
-- JavaFX 20
-- Maven
-- MySQL
-- BCrypt (`jbcrypt`)
-- SceneBuilder (FXML)
+- **Java 23** (LTS)
+- **JavaFX 20** (OpenJFX)
+- **AtlantaFX** (Modern CSS Framework)
+- **HikariCP** (Connection Pooling)
+- **MySQL** (Persistence)
+- **BCrypt** (Security)
+- **JUnit 5 / Mockito** (Testing)
+- **SLF4J / Logback** (Logging)
+- **Maven** (Dependency Management)
 
 ## 🗂️ Estructura del proyecto
 
