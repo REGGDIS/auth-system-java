@@ -1,6 +1,5 @@
 package auth.controller;
 
-import auth.model.Usuario;
 import auth.util.ConexionBD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
