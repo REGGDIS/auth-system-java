@@ -2,13 +2,11 @@ package auth.controller;
 
 import auth.model.Usuario;
 import auth.util.ConexionBD;
+import auth.util.SceneManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
@@ -167,15 +165,7 @@ public class DashboardAdminController {
 
     @FXML
     public void cerrarSesion() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            Stage stage = (Stage) tablaUsuarios.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle("Login");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SceneManager.switchScene("/login.fxml", "Login");
     }
 
     private void mostrarAlerta(String mensaje) {

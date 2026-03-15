@@ -1,17 +1,12 @@
 package auth.controller;
 
-import auth.util.ConexionBD;
+import auth.model.Usuario;
+import auth.service.AuthService;
+import auth.util.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import org.mindrot.jbcrypt.BCrypt;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.Optional;
 
 public class LoginController {
 
@@ -24,6 +19,8 @@ public class LoginController {
     @FXML
     private Label lblMensaje;
 
+    private final AuthService authService = new AuthService();
+
     @FXML
     public void handleLogin(ActionEvent event) {
         String correo = txtCorreo.getText();
@@ -34,55 +31,23 @@ public class LoginController {
             return;
         }
 
-        try (Connection conn = ConexionBD.conectar()) {
-            String query = "SELECT * FROM usuarios WHERE correo = ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, correo);
+        Optional<Usuario> loginResult = authService.login(correo, contrasena);
 
-            ResultSet rs = stmt.executeQuery();
+        if (loginResult.isPresent()) {
+            Usuario usuario = loginResult.get();
+            lblMensaje.setText("Inicio de sesión exitoso.");
 
-            if (rs.next()) {
-                String hashed = rs.getString("contrasena");
-                String rol = rs.getString("rol");
-
-                System.out.println("Contraseña ingresada: " + contrasena);
-                System.out.println("Hash desde la BD: " + hashed);
-                System.out.println("Comparación BCrypt: " + BCrypt.checkpw(contrasena, hashed));
-
-                if (BCrypt.checkpw(contrasena, hashed)) {
-                    lblMensaje.setText("Inicio de sesión exitoso.");
-
-                    // Redirigir según el rol
-                    String vista = rol.equals("admin") ? "/dashboard_admin.fxml" : "/dashboard_user.fxml";
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource(vista));
-                    Stage stage = (Stage) txtCorreo.getScene().getWindow();
-                    stage.setScene(new Scene(loader.load()));
-                    stage.setTitle("Panel - " + rol.toUpperCase());
-                    stage.show();
-                } else {
-                    lblMensaje.setText("Contraseña incorrecta.");
-                }
-            } else {
-                lblMensaje.setText("Usuario no encontrado.");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            lblMensaje.setText("Error al conectar a la base de datos.");
+            // Redirigir según el rol
+            String vista = usuario.getRol().equals("admin") ? "/dashboard_admin.fxml" : "/dashboard_user.fxml";
+            String titulo = "Panel - " + usuario.getRol().toUpperCase();
+            SceneManager.switchScene(vista, titulo);
+        } else {
+            lblMensaje.setText("Correo o contraseña incorrectos.");
         }
     }
 
     @FXML
     public void irARegistro(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registro.fxml"));
-            Stage stage = (Stage) txtCorreo.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle("Registro de Usuario");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            lblMensaje.setText("Error al cargar la vista de registro.");
-        }
+        SceneManager.switchScene("/registro.fxml", "Registro de Usuario");
     }
 }
